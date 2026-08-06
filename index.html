@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>葛尾焼きプロジェクト | Katsurao-yaki Project</title>
+<meta name="description" content="福島県双葉郡葛尾村。原発事故により文化や技術の継承が困難となった土地で、村の土から焼き物を立ち上げる試み——葛尾焼きプロジェクト。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #14110d;
+    --bg-soft: #1b1712;
+    --paper: #ece4d6;
+    --paper-dim: #b9ad9a;
+    --clay: #c1652f;
+    --clay-bright: #e07a3e;
+    --ember: #8a2f1c;
+    --line: rgba(236,228,214,0.14);
+    --serif: "Shippori Mincho", serif;
+    --sans: "Zen Kaku Gothic New", sans-serif;
+    --en: "EB Garamond", serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--paper);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.9;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+
+  ::selection{background:var(--clay);color:#14110d;}
+
+  .noise{
+    position:fixed;inset:0;pointer-events:none;z-index:500;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* NAV */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 6vw;
+    mix-blend-mode:difference;
+    transition:padding .4s ease;
+  }
+  header.nav .logo{
+    font-family:var(--serif);font-size:15px;letter-spacing:.14em;font-weight:600;
+  }
+  header.nav .logo span{display:block;font-family:var(--en);font-size:10px;letter-spacing:.2em;opacity:.6;font-weight:400;margin-top:2px;}
+  header.nav nav{display:flex;gap:2.6vw;}
+  header.nav nav a{
+    font-size:12.5px;letter-spacing:.08em;position:relative;padding-bottom:4px;
+  }
+  header.nav nav a::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--paper);transition:width .35s ease;
+  }
+  header.nav nav a:hover::after{width:100%;}
+  .nav-toggle{display:none;}
+
+  /* HERO */
+  .hero{
+    position:relative;height:100svh;min-height:560px;display:flex;align-items:flex-end;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;background-image:url("images/hero-kiln.jpg");
+    background-size:cover;background-position:center 65%;
+    filter:saturate(0.85) contrast(1.08) brightness(.62);
+    transform:scale(1.08);
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(20,17,13,.35) 0%, rgba(20,17,13,.15) 35%, rgba(20,17,13,.85) 92%, var(--bg) 100%);
+    z-index:1;
+  }
+  .hero-content{position:relative;z-index:2;padding:0 6vw 7vw;width:100%;}
+  .hero-eyebrow{
+    font-family:var(--en);font-style:italic;letter-spacing:.28em;font-size:13px;
+    color:var(--clay-bright);text-transform:uppercase;margin-bottom:22px;
+    opacity:0;animation:fadeUp 1.1s .3s ease forwards;
+  }
+  .hero-title{
+    font-family:var(--serif);font-weight:800;
+    font-size:clamp(2.6rem, 8.2vw, 6.6rem);
+    line-height:1.08;letter-spacing:.02em;
+    opacity:0;animation:fadeUp 1.1s .5s ease forwards;
+  }
+  .hero-sub{
+    margin-top:26px;font-size:clamp(14px,1.6vw,17px);color:var(--paper-dim);
+    max-width:560px;line-height:2;font-weight:300;
+    opacity:0;animation:fadeUp 1.1s .75s ease forwards;
+  }
+  .hero-meta{
+    margin-top:38px;display:flex;gap:36px;flex-wrap:wrap;
+    font-family:var(--en);font-size:12.5px;letter-spacing:.08em;color:var(--paper-dim);
+    opacity:0;animation:fadeUp 1.1s .95s ease forwards;
+  }
+  .hero-meta div span{display:block;color:var(--paper);font-family:var(--sans);font-size:14px;letter-spacing:.03em;margin-top:5px;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+  .scroll-cue{
+    position:absolute;right:6vw;bottom:34px;z-index:2;
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+    font-family:var(--en);font-size:11px;letter-spacing:.2em;color:var(--paper-dim);
+  }
+  .scroll-cue .line{width:1px;height:46px;background:linear-gradient(var(--clay-bright),transparent);animation:cue 2s ease-in-out infinite;}
+  @keyframes cue{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+  /* SECTIONS */
+  section{position:relative;padding:min(16vw,150px) 6vw;}
+  .section-tag{
+    display:flex;align-items:center;gap:14px;margin-bottom:46px;
+    font-family:var(--en);font-size:12.5px;letter-spacing:.24em;color:var(--clay-bright);text-transform:uppercase;
+  }
+  .section-tag::before{content:"";width:34px;height:1px;background:var(--clay-bright);}
+
+  .reveal{opacity:0;transform:translateY(36px);transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* STATEMENT */
+  .statement{
+    padding:min(14vw,130px) 6vw;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:var(--bg-soft);
+  }
+  .statement blockquote{
+    font-family:var(--serif);font-weight:500;
+    font-size:clamp(1.5rem, 3.6vw, 2.6rem);
+    line-height:1.85;max-width:1050px;margin:0 auto;
+    text-align:center;letter-spacing:.02em;
+  }
+  .statement blockquote::before{content:"“";color:var(--clay);}
+  .statement blockquote::after{content:"”";color:var(--clay);}
+  .statement cite{
+    display:block;margin-top:34px;text-align:center;font-style:normal;
+    font-family:var(--en);font-size:12.5px;letter-spacing:.16em;color:var(--paper-dim);
+  }
+
+  /* OVERVIEW two-col */
+  .overview{display:grid;grid-template-columns:1fr 1fr;gap:min(8vw,90px);align-items:start;}
+  .overview .col-img{position:sticky;top:110px;}
+  .overview .col-img figure{overflow:hidden;border-radius:2px;}
+  .overview .col-img img{transition:transform 1.4s cubic-bezier(.16,1,.3,1);}
+  .overview .col-img:hover img{transform:scale(1.06);}
+  .overview figcaption{margin-top:14px;font-family:var(--en);font-size:11.5px;letter-spacing:.08em;color:var(--paper-dim);}
+  h2.big{
+    font-family:var(--serif);font-weight:600;font-size:clamp(1.8rem,3.4vw,2.6rem);
+    line-height:1.5;margin-bottom:30px;letter-spacing:.02em;
+  }
+  .overview p{color:var(--paper-dim);font-size:15.5px;margin-bottom:22px;max-width:560px;}
+  .overview p strong{color:var(--paper);font-weight:500;}
+
+  /* PROCESS */
+  .process-list{display:flex;flex-direction:column;}
+  .process-item{
+    display:grid;grid-template-columns:.9fr 1.4fr;gap:6vw;
+    padding:56px 0;border-top:1px solid var(--line);align-items:center;
+  }
+  .process-item:last-child{border-bottom:1px solid var(--line);}
+  .process-num{
+    font-family:var(--en);font-size:14px;letter-spacing:.2em;color:var(--clay-bright);margin-bottom:16px;
+  }
+  .process-item h3{
+    font-family:var(--serif);font-size:clamp(1.4rem,2.4vw,1.9rem);font-weight:600;margin-bottom:16px;letter-spacing:.02em;
+  }
+  .process-item p{color:var(--paper-dim);font-size:14.5px;max-width:480px;}
+  .process-item .pimg{overflow:hidden;border-radius:2px;aspect-ratio:4/3;}
+  .process-item .pimg img{width:100%;height:100%;object-fit:cover;transition:transform 1s ease;}
+  .process-item:hover .pimg img{transform:scale(1.05);}
+  .process-item:nth-child(even){grid-template-columns:1.4fr .9fr;}
+  .process-item:nth-child(even) .pimg{order:-1;}
+
+  /* TIMELINE */
+  .timeline{border-top:1px solid var(--line);}
+  .tl-item{
+    display:grid;grid-template-columns:160px 1fr;gap:40px;
+    padding:44px 0;border-bottom:1px solid var(--line);
+  }
+  .tl-year{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.2rem);font-weight:600;color:var(--clay-bright);}
+  .tl-year small{display:block;font-family:var(--en);font-size:11px;letter-spacing:.1em;color:var(--paper-dim);margin-top:8px;font-style:italic;}
+  .tl-body h4{font-family:var(--serif);font-size:1.2rem;font-weight:600;margin-bottom:14px;letter-spacing:.02em;}
+  .tl-body p{color:var(--paper-dim);font-size:14.5px;max-width:640px;}
+
+  /* GALLERY */
+  .gallery-grid{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:14px;
+  }
+  .gallery-grid figure{overflow:hidden;border-radius:2px;position:relative;cursor:pointer;}
+  .gallery-grid img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1), filter .5s ease;}
+  .gallery-grid figure:hover img{transform:scale(1.08);}
+  .gallery-grid figcaption{
+    position:absolute;left:0;right:0;bottom:0;padding:16px;
+    background:linear-gradient(0deg, rgba(0,0,0,.72), transparent);
+    font-family:var(--en);font-size:11px;letter-spacing:.06em;color:var(--paper);
+    opacity:0;transition:opacity .4s ease;
+  }
+  .gallery-grid figure:hover figcaption{opacity:1;}
+  .g1{grid-column:span 3;aspect-ratio:4/3;}
+  .g2{grid-column:span 3;aspect-ratio:4/3;}
+  .g3{grid-column:span 2;aspect-ratio:3/4;}
+  .g4{grid-column:span 2;aspect-ratio:3/4;}
+  .g5{grid-column:span 2;aspect-ratio:3/4;}
+  .g6{grid-column:span 3;aspect-ratio:16/10;}
+  .g7{grid-column:span 3;aspect-ratio:16/10;}
+
+  /* VISION */
+  .vision{
+    background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    text-align:center;
+  }
+  .vision .section-tag{justify-content:center;}
+  .vision .section-tag::before{display:none;}
+  .vision h2.big{max-width:900px;margin-left:auto;margin-right:auto;text-align:center;}
+  .vision-stages{
+    display:flex;justify-content:center;gap:0;margin:56px auto 0;flex-wrap:wrap;max-width:900px;
+  }
+  .vision-stages .stage{
+    padding:0 26px;font-family:var(--en);font-size:13px;letter-spacing:.1em;color:var(--paper-dim);
+    position:relative;
+  }
+  .vision-stages .stage.active{color:var(--clay-bright);font-weight:600;}
+  .vision-stages .stage:not(:last-child)::after{content:"→";position:absolute;right:-4px;color:var(--line);}
+  .vision p.lead{max-width:680px;margin:40px auto 0;color:var(--paper-dim);font-size:15px;}
+
+  /* FOOTER */
+  footer{padding:100px 6vw 50px;border-top:1px solid var(--line);}
+  .footer-top{
+    display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:60px;padding-bottom:70px;
+  }
+  footer h5{font-family:var(--en);font-size:11.5px;letter-spacing:.18em;color:var(--paper-dim);text-transform:uppercase;margin-bottom:20px;}
+  footer .fname{font-family:var(--serif);font-size:1.5rem;font-weight:600;margin-bottom:10px;}
+  footer .fen{font-family:var(--en);font-style:italic;color:var(--paper-dim);font-size:13px;}
+  footer .fdesc{margin-top:18px;color:var(--paper-dim);font-size:13.5px;max-width:340px;}
+  footer ul{list-style:none;}
+  footer ul li{margin-bottom:12px;font-size:13.5px;color:var(--paper-dim);line-height:1.7;}
+  .footer-bottom{
+    display:flex;justify-content:space-between;align-items:center;padding-top:34px;border-top:1px solid var(--line);
+    font-family:var(--en);font-size:11px;letter-spacing:.06em;color:var(--paper-dim);flex-wrap:wrap;gap:14px;
+  }
+  .back-top{
+    width:46px;height:46px;border:1px solid var(--line);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;transition:.3s ease;
+  }
+  .back-top:hover{border-color:var(--clay-bright);color:var(--clay-bright);transform:translateY(-4px);}
+
+  @media (max-width:860px){
+    header.nav nav{display:none;}
+    .overview{grid-template-columns:1fr;}
+    .overview .col-img{position:static;order:-1;}
+    .process-item, .process-item:nth-child(even){grid-template-columns:1fr;gap:26px;}
+    .process-item .pimg, .process-item:nth-child(even) .pimg{order:0;}
+    .tl-item{grid-template-columns:1fr;gap:16px;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
+    .g1,.g2,.g3,.g4,.g5,.g6,.g7{grid-column:span 1;aspect-ratio:1/1;}
+    .footer-top{grid-template-columns:1fr;gap:40px;}
+  }
+</style>
+</head>
+<body>
+<div class="noise"></div>
+
+<header class="nav">
+  <div class="logo">葛尾焼きプロジェクト<span>KATSURAO&#8209;YAKI&nbsp;PROJECT</span></div>
+  <nav>
+    <a href="#overview">概要</a>
+    <a href="#process">プロセス</a>
+    <a href="#timeline">歩み</a>
+    <a href="#gallery">記録</a>
+    <a href="#vision">これから</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Art Project — Fukushima, Japan</div>
+    <h1 class="hero-title">葛尾焼き<br>プロジェクト</h1>
+    <p class="hero-sub">原発事故によって文化と技術の継承が途切れた村で、<br class="brk">村の土から、もう一度焼き物をはじめる。</p>
+    <div class="hero-meta">
+      <div>Location<span>福島県双葉郡葛尾村</span></div>
+      <div>Since<span>2024 —</span></div>
+      <div>Practice<span>陶芸 / 地域継承</span></div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>SCROLL</span><span class="line"></span></div>
+</section>
+
+<section class="statement reveal">
+  <blockquote>葛尾焼きプロジェクトは、原発事故により文化や技術の継承が困難となった福島県葛尾村で、村の土から焼き物を立ち上げる試みである。村民と共に継承者を育て、地域の技術と歴史を参照しながら、新しい産業としての確立を目指している。</blockquote>
+  <cite>— 葛尾焼きプロジェクトについて</cite>
+</section>
+
+<section id="overview">
+  <div class="section-tag reveal">Overview — 概要</div>
+  <div class="overview">
+    <div class="col-img reveal">
+      <figure>
+        <img src="images/process-digging.jpg" alt="葛尾村内で採取された土">
+      </figure>
+      <figcaption>村内で採取した土。検査の結果、飲食物としても問題のない放射線量であることが確認されている。</figcaption>
+    </div>
+    <div class="col-text">
+      <h2 class="big reveal">村に土から<br>焼き物を、立ち上げる。</h2>
+      <p class="reveal"><strong>2024年</strong>、東日本大震災で被災した12市町村の復興を目的とした「ハマカルアートプロジェクト」への参加をきっかけに、福島県双葉郡葛尾村での制作がはじまった。約3週間（2024年12月14日〜2025年1月5日）にわたり村に滞在し、「復興の定義」「原子力災害の今」「福島の現状を他地域の人々に伝えること」をテーマに掲げながら、村の土を採取して成形・焼成を行った。</p>
+      <p class="reveal">原発事故の影響により汚染土の問題が残る地域ではあるが、検査の結果、飲食物として使用しても問題のない放射線量であったため、葛尾村の粘土を作品に用いることができた。</p>
+      <p class="reveal">帰還困難区域に指定された地域では、元の住民が土地に戻れない状況が続き、その土地に根ざした文化や歴史が継承されないまま失われていく可能性がある。愛知県で育った自分にとって当然だった粘土採取や技術の継承は、福島では当たり前のことではない。<strong>福島の土で窯元のあり方を考えることは、焼き物という文化と歴史をつないでいくことの重要性を、あらためて問い直す行為でもある。</strong></p>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="section-tag reveal">Process — 制作のプロセス</div>
+  <h2 class="big reveal" style="max-width:640px;">継承が起こり得る<br>条件を、つくる。</h2>
+  <p class="reveal" style="color:var(--paper-dim);font-size:15px;max-width:620px;margin-top:24px;">葛尾焼きプロジェクトは、文化を保存・展示することを目的とするのではなく、次の4つの実践を通して「継承が起こり得る条件」を地域の中に構築することを目指している。</p>
+
+  <div class="process-list" style="margin-top:60px;">
+    <div class="process-item reveal">
+      <div class="ptext">
+        <div class="process-num">01 — 採取</div>
+        <h3>村の土を、掘る。</h3>
+        <p>葛尾村内で土・粘土を採取する。地面を掘り、袋に詰め、乾かし、漉す。焼き物の出発点は、その土地そのものである。</p>
+      </div>
+      <div class="pimg"><img src="images/process-digging.jpg" alt="土の採取"></div>
+    </div>
+
+    <div class="process-item reveal">
+      <div class="ptext">
+        <div class="process-num">02 — 築窯</div>
+        <h3>炭窯を、新たに築く。</h3>
+        <p>村内に炭窯を新設し、古くから葛尾村に伝わる炭窯の技術を、村民の監修のもとで再現する。設備ではなく、関係性ごと村に残すための窯である。</p>
+      </div>
+      <div class="pimg"><img src="images/process-kiln-build.jpg" alt="炭窯の設営"></div>
+    </div>
+
+    <div class="process-item reveal">
+      <div class="ptext">
+        <div class="process-num">03 — 継承</div>
+        <h3>手を、ともに動かす。</h3>
+        <p>継承者となる村民を含む複数名へ向けたワークショップを、複数回にわたり実施。成形から焼成までの工程を、村の人々とともに共有し、可視化していく。</p>
+      </div>
+      <div class="pimg"><img src="images/process-throwing.jpg" alt="成形のワークショップ"></div>
+    </div>
+
+    <div class="process-item reveal">
+      <div class="ptext">
+        <div class="process-num">04 — 記録</div>
+        <h3>火を、焚く。</h3>
+        <p>新設した炭窯を用いて焼成を行う。あわせて映像や文章による記録を制作し公開することで、次の継承者に向けたアーカイブとして残していく。</p>
+      </div>
+      <div class="pimg"><img src="images/process-smoke.jpg" alt="炭窯の焼成、立ち上る煙"></div>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="section-tag reveal">Timeline — プロジェクトの歩み</div>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-year">2024<small>Phase 1</small></div>
+      <div class="tl-body">
+        <h4>「葛尾焼きを考える。」</h4>
+        <p>ハマカルアートプロジェクトに参加。葛尾村に滞在し、村の土を採取して成形・焼成を実施した。葛尾焼きを「大切なものを伝えていくための焼き物」と位置づけ、継承者となった村民を含む3名へ技術を伝えるワークショップを複数回開催。今後の継承者に向けた映像制作も行った。葛尾村復興交流館あぜりあでの展示を経て、旧双葉駅舎・道の駅なみえ・東日本大震災原子力災害伝承館でのサテライト展示、さらにギャラリーチフリグリ（仙台）、うちらの居間分館（東京）へと巡回した。</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-year">2025<small>Phase 2</small></div>
+      <div class="tl-body">
+        <h4>炭窯とともに。</h4>
+        <p>2期目となるこの年は、古くから葛尾村に伝わる炭窯の技術を村民の監修のもと新設し、その窯を用いて焼成を実施。成果報告会として展示を行った。葛尾村には縄文土器が出土した記録もあり、その歴史も踏まえながら、葛尾焼き後継者の育成をきっかけに村へ陶芸文化を根付かせることを目指している。</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-year">2026<small>Ongoing</small></div>
+      <div class="tl-body">
+        <h4>新しい産業へ。</h4>
+        <p>継続的にプロジェクトを行うことで、新しい産業としての確立を目指す。地域外の企業・団体との協働や、個人消費者向けの販売、ECサイトを通じた流通など、to B / to C 双方を見据えた制作・流通の構想が進行している。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="section-tag reveal">Documentation — 記録</div>
+  <div class="gallery-grid">
+    <figure class="g1 reveal"><img src="images/exhibition-projection.jpg" alt="成果報告会の展示風景、焼成の映像投影"><figcaption>成果報告会 展示風景 — 陶器・映像・写真 (2025)</figcaption></figure>
+    <figure class="g2 reveal"><img src="images/exhibition-wide.jpg" alt="展示風景、記録写真と焼き物の棚"><figcaption>制作記録と焼成された器の棚</figcaption></figure>
+    <figure class="g3 reveal"><img src="images/works-bowls.jpg" alt="焼き上がった葛尾焼きの器"><figcaption>葛尾の土で焼かれた器</figcaption></figure>
+    <figure class="g4 reveal"><img src="images/process-mold.jpg" alt="型に粘土を詰める様子"><figcaption>採取した土を型に詰める</figcaption></figure>
+    <figure class="g5 reveal"><img src="images/process-soil-closeup.jpg" alt="乾燥させた村の土"><figcaption>乾燥させた村の土</figcaption></figure>
+    <figure class="g6 reveal"><img src="images/scenery-village.jpg" alt="葛尾村の景色と手作りの休憩場"><figcaption>滞在制作の合間、村の景色の中で</figcaption></figure>
+    <figure class="g7 reveal"><img src="images/exhibition-table.jpg" alt="制作された器と記録写真"><figcaption>「葛尾焼きを考える。」展示風景 (2024)</figcaption></figure>
+  </div>
+</section>
+
+<section id="vision" class="vision reveal">
+  <div class="section-tag">Vision — これから</div>
+  <h2 class="big">工芸が地域に根付くまでには、<br>段階的な変化を経る。</h2>
+  <div class="vision-stages">
+    <div class="stage active">Project</div>
+    <div class="stage">Program</div>
+    <div class="stage">Movement</div>
+    <div class="stage">Culture</div>
+  </div>
+  <p class="lead">自身の役割は、この中の「ムーブメント」を形成する段階までと位置づけている。それ以降の展開は地域に委ねられるべきであり、最終的な目標は、自分の介入がなくとも地域の中で制作と経済が自律的に循環する状態をつくることにある。その実現は、ある種の喪失感を伴うかもしれない——しかし、その役割の移行を引き受けること自体が、このプロジェクトの重要な要素だと考えている。</p>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <h5>Artist</h5>
+      <div class="fname">杉山 仁彦</div>
+      <div class="fen">Yoshihiko Sugiyama</div>
+      <p class="fdesc">2002年 愛知県西尾市生まれ。名古屋芸術大学大学院 工芸制作研究。ブリキ缶を用いた日常的な陶器制作から、福島県葛尾村での自立した産業を見据えた活動、三重県伊賀市でのアートスペースのディレクションなど、陶芸を軸としたミクロとマクロの実践を横断している。</p>
+    </div>
+    <div>
+      <h5>Related Practice</h5>
+      <ul>
+        <li>場七陶芸部（愛知県岩倉市・共同アトリエ場七）</li>
+        <li>アートスペース 乃 -NANJI-（三重県伊賀市）</li>
+      </ul>
+    </div>
+    <div>
+      <h5>Selected Venues</h5>
+      <ul>
+        <li>葛尾村復興交流館あぜりあ（福島）</li>
+        <li>ギャラリーチフリグリ（宮城）</li>
+        <li>うちらの居間分館（東京）</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Yoshihiko Sugiyama — 葛尾焼きプロジェクト</span>
+    <a class="back-top" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.15, rootMargin:"0px 0px -60px 0px"});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
