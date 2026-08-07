@@ -136,6 +136,11 @@
     line-height:2.05;max-width:820px;margin:0 auto;
     text-align:left;letter-spacing:.02em;color:var(--ink);
   }
+  .statement blockquote .stmt-line1{white-space:nowrap;}
+  @media (max-width:700px){
+    .statement blockquote .stmt-line1{white-space:normal;}
+    .statement blockquote .stmt-br{display:none;}
+  }
   .statement cite{
     display:block;max-width:820px;margin:24px auto 0;text-align:left;font-style:italic;
     font-family:var(--en);font-size:11px;letter-spacing:.12em;color:var(--ink-faint);
@@ -313,7 +318,7 @@
 </div>
 
 <section class="statement reveal">
-  <blockquote>葛尾焼きプロジェクトは、原発事故により文化や技術の継承が困難となった福島県葛尾村で、<br>村の土から焼き物を立ち上げる試みである。村民と共に継承者を育て、地域の技術と歴史を参照しながら、新しい産業としての確立を目指している。</blockquote>
+  <blockquote><span class="stmt-line1">葛尾焼きプロジェクトは、原発事故により文化や技術の継承が困難となった福島県葛尾村で、</span><br class="stmt-br">村の土から焼き物を立ち上げる試みである。村民と共に継承者を育て、地域の技術と歴史を参照しながら、新しい産業としての確立を目指している。</blockquote>
   <cite>— 葛尾焼きプロジェクトについて</cite>
 </section>
 
