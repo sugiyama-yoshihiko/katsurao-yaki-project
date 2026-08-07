@@ -218,6 +218,19 @@
   .g6{grid-column:span 3;aspect-ratio:16/10;}
   .g7{grid-column:span 3;aspect-ratio:16/10;}
 
+  /* NEWS */
+  .news-list{display:flex;flex-direction:column;border-top:1px solid var(--line);}
+  .news-item{
+    display:grid;grid-template-columns:150px 1fr 24px;gap:24px;align-items:center;
+    padding:26px 0;border-bottom:1px solid var(--line);color:inherit;
+    transition:opacity .25s ease;
+  }
+  .news-item:hover{opacity:.6;}
+  .news-date{font-family:var(--en);font-size:13px;font-style:italic;color:var(--clay);}
+  .news-date small{display:block;margin-top:5px;font-family:var(--sans);font-style:normal;font-size:10.5px;color:var(--ink-faint);letter-spacing:.02em;}
+  .news-title{font-size:13.5px;color:var(--ink);line-height:1.8;}
+  .news-arrow{font-family:var(--en);font-size:15px;color:var(--ink-faint);text-align:right;}
+
   /* VISION */
   .vision{
     background:var(--bg-deep);
@@ -277,6 +290,8 @@
     .tl-item{grid-template-columns:1fr;gap:12px;}
     .gallery-grid{grid-template-columns:repeat(2,1fr);}
     .g1,.g2,.g3,.g4,.g5,.g6,.g7{grid-column:span 1;aspect-ratio:1/1;}
+    .news-item{grid-template-columns:1fr;gap:8px;padding:20px 0;}
+    .news-arrow{display:none;}
     .footer-top{grid-template-columns:1fr;gap:34px;}
     .hero-photo{height:56vh;}
   }
@@ -320,6 +335,7 @@
     <a href="#process">プロセス — Process</a>
     <a href="#timeline">歩み — Timeline</a>
     <a href="#gallery">記録 — Documentation</a>
+    <a href="#news">ニュース — News</a>
     <a href="#vision">これから — Vision</a>
   </nav>
 
@@ -440,6 +456,28 @@
     <figure class="g5 reveal"><img src="images/workshop-indoor.jpg" alt="室内でのワークショップの様子"><figcaption>技術を伝えるワークショップ</figcaption></figure>
     <figure class="g6 reveal"><img src="images/scenery-village.jpg" alt="葛尾村の景色"><figcaption>滞在制作の合間、村の景色の中で</figcaption></figure>
     <figure class="g7 reveal"><img src="images/exhibition-table.jpg" alt="制作された器と記録写真"><figcaption>「葛尾焼きを考える。」成果報告会 (2025)</figcaption></figure>
+  </div>
+</section>
+
+<section id="news">
+  <div class="section-tag reveal">News — ニュース</div>
+  <h2 class="big reveal" style="max-width:520px;">葛尾焼き・杉山仁彦に関する記録と報道。</h2>
+  <div class="news-list" style="margin-top:44px;">
+    <a class="news-item reveal" href="https://hamacul-project.com/assets/image/archive2024.pdf" target="_blank" rel="noopener">
+      <span class="news-date">2024.12<small>ハマカルアートプロジェクト2024 アーカイブ集</small></span>
+      <span class="news-title">「葛尾焼きを考える」をテーマに、葛尾村へ約3週間の滞在制作を実施</span>
+      <span class="news-arrow">↗</span>
+    </a>
+    <a class="news-item reveal" href="https://note.com/katsurao_co/n/n05fe4443f677" target="_blank" rel="noopener">
+      <span class="news-date">2025.09.10<small>スキコム by Katsurao Collective</small></span>
+      <span class="news-title">音声配信「杉山仁彦インタビュー — 新たな陶芸の文化を立ち上げる」を公開</span>
+      <span class="news-arrow">↗</span>
+    </a>
+    <a class="news-item reveal" href="https://note.com/katsurao_co/n/n3db3d460a9b2" target="_blank" rel="noopener">
+      <span class="news-date">2026.02.10<small>Katsurao Collective</small></span>
+      <span class="news-title">「Katsurao AIR 2025 Archives：杉山仁彦」を公開</span>
+      <span class="news-arrow">↗</span>
+    </a>
   </div>
 </section>
 
