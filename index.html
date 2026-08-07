@@ -101,6 +101,11 @@
   .sb-label{font-family:var(--en);font-style:italic;font-size:11px;color:var(--ink-faint);letter-spacing:.03em;margin-bottom:9px;}
   .sb-row{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--ink);padding:5px 0;letter-spacing:.02em;}
   .sb-row span:first-child{color:var(--ink-dim);}
+  .sb-list{display:flex;flex-direction:column;gap:10px;}
+  .sb-list div{font-size:12px;color:var(--ink);letter-spacing:.02em;line-height:1.6;}
+  .sb-list a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line);}
+  .sb-list a:hover{color:var(--clay);}
+  .sb-list small{display:block;margin-top:3px;font-size:11px;color:var(--ink-dim);}
 
   .sb-nav{margin-top:34px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:11px;}
   .sb-nav a{font-size:12.5px;color:var(--ink-dim);letter-spacing:.03em;transition:color .25s ease;}
@@ -235,7 +240,7 @@
   /* FOOTER */
   footer{padding:70px 5.5vw 40px;border-top:1px solid var(--line);}
   .footer-top{
-    display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:50px;padding-bottom:50px;
+    display:grid;grid-template-columns:1.4fr 1fr;gap:50px;padding-bottom:50px;
   }
   footer h5{font-family:var(--en);font-size:10px;font-style:italic;letter-spacing:.14em;color:var(--ink-faint);margin-bottom:16px;font-weight:400;}
   footer .fname{font-family:var(--serif);font-size:1.05rem;font-weight:500;margin-bottom:6px;color:var(--ink);}
@@ -294,6 +299,20 @@
   <div class="sb-block">
     <div class="sb-label">Practice</div>
     <div class="sb-row"><span>Field</span><span>陶芸 / 地域継承</span></div>
+  </div>
+  <div class="sb-block">
+    <div class="sb-label">Selected Venues</div>
+    <div class="sb-list">
+      <div>葛尾村復興交流館あぜりあ（福島）</div>
+      <div>ギャラリーチフリグリ（宮城）</div>
+      <div>うちらの居間分館（東京）</div>
+    </div>
+  </div>
+  <div class="sb-block">
+    <div class="sb-label">Production Hub</div>
+    <div class="sb-list">
+      <div><a href="https://www.instagram.com/ilu_coto/" target="_blank" rel="noopener">いること cafeしずく</a>（福島県双葉郡葛尾村）<small>村内に窯を設置し、陶芸制作の拠点として運営</small></div>
+    </div>
   </div>
 
   <nav class="sb-nav">
@@ -450,18 +469,6 @@
         <li>アートスペース 乃 -NANJI-（三重県伊賀市）</li>
         <li>葛尾焼きプロジェクト（福島県葛尾村）</li>
         <li>場七陶芸部（愛知県岩倉市・共同アトリエ場七）</li>
-      </ul>
-    </div>
-    <div>
-      <h5>Selected Venues</h5>
-      <ul>
-        <li>葛尾村復興交流館あぜりあ（福島）</li>
-        <li>ギャラリーチフリグリ（宮城）</li>
-        <li>うちらの居間分館（東京）</li>
-      </ul>
-      <h5 style="margin-top:26px;">Production Hub</h5>
-      <ul>
-        <li><a href="https://www.instagram.com/ilu_coto/" target="_blank" rel="noopener">いること cafeしずく</a>（福島県双葉郡葛尾村）<br>村内に窯を設置し、陶芸制作の拠点として運営</li>
       </ul>
     </div>
   </div>
