@@ -274,16 +274,21 @@
 
   /* MOBILE */
   .sb-mobile-head{display:none;}
-  @media (max-width:900px){
+  @media (max-width:1024px){
     .sidebar{display:none;}
     main{margin-left:0;}
     .sb-mobile-head{
       display:flex;align-items:center;justify-content:space-between;
-      padding:20px 6vw;border-bottom:1px solid var(--line);background:var(--bg);
+      gap:16px;padding:20px 6vw;border-bottom:1px solid var(--line);background:var(--bg);
       position:sticky;top:0;z-index:100;
     }
     .sb-mobile-head .sb-logo{font-size:15px;}
     .sb-mobile-head .sb-logo span{font-size:8.5px;margin-top:3px;}
+    .sb-mobile-meta{
+      font-family:var(--en);font-size:11px;font-style:italic;letter-spacing:.04em;
+      color:var(--ink-faint);text-align:right;white-space:nowrap;
+      transition:opacity .35s ease;
+    }
     .overview{grid-template-columns:1fr;}
     .overview .col-img{position:static;order:-1;}
     .process-item, .process-item:nth-child(even){grid-template-columns:1fr;gap:20px;}
@@ -346,6 +351,7 @@
 
 <div class="sb-mobile-head">
   <h1 class="sb-logo">葛尾焼きプロジェクト<span>KATSURAO&#8209;YAKI&nbsp;PROJECT</span></h1>
+  <div class="sb-mobile-meta" id="sbMobileMeta">福島県双葉郡葛尾村</div>
 </div>
 
 <main>
@@ -545,6 +551,30 @@
     });
   },{threshold:0.15, rootMargin:"0px 0px -60px 0px"});
   revealEls.forEach(el=>io.observe(el));
+
+  const mobileMeta = document.getElementById('sbMobileMeta');
+  if(mobileMeta){
+    const metaBySection = {
+      overview: '福島県双葉郡葛尾村',
+      process: '陶芸 / 地域継承',
+      timeline: '2024 —',
+      gallery: '陶芸 / 地域継承',
+      news: '2024 —',
+      vision: '福島県双葉郡葛尾村'
+    };
+    const metaIo = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting && metaBySection[e.target.id]){
+          mobileMeta.style.opacity = 0;
+          setTimeout(()=>{
+            mobileMeta.textContent = metaBySection[e.target.id];
+            mobileMeta.style.opacity = 1;
+          }, 180);
+        }
+      });
+    }, {rootMargin:"-45% 0px -50% 0px", threshold:0});
+    document.querySelectorAll('main section[id]').forEach(s=>metaIo.observe(s));
+  }
 </script>
 </body>
 </html>
